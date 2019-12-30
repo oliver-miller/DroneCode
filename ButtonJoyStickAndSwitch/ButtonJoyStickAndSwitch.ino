@@ -2,9 +2,8 @@
 int VRx = A0;
 int VRy = A1;
 
-// Declare pins for button
- const int blueButton = 2;
- const int redButton = 3;
+// Declare pin for button
+ const int upButton = 2;
 
 // Variables for the joystick
 int xPosition = 0;
@@ -12,9 +11,8 @@ int yPosition = 0;
 int mapX = 0;
 int mapY = 0;
 
-// Variables for the button
-int blueState = 0;
-int redState = 0;
+// Variable for the button
+int upState = 0;
 
 // Virtual altitiude variable
 int altitude = 0;
@@ -27,9 +25,8 @@ void setup() {
   pinMode(VRx, INPUT);
   pinMode(VRy, INPUT);
 
-  // Initialize button pins
-  pinMode(blueButton, INPUT);
-  pinMode(redButton, INPUT);
+  // Initialize button pin
+  pinMode(upButton, INPUT);
 }
 
 void loop() {
@@ -41,23 +38,19 @@ void loop() {
   mapX = map(xPosition, -15, 1023, -512, 512);
   mapY = map(yPosition, -13, 1023, -512, 512);
 
-  // Read button pins
-  blueState = digitalRead(blueButton);
-  redState = digitalRead(redButton);
+  // Read button pin
+  upState = digitalRead(upButton);
 
-  if (blueState == HIGH) {  // If blue button is pushed, go up
+  if (upState == LOW) {  // If blue button is pushed, go up
     altitude += 1;
-  }
-  if (redState == HIGH) {   // If red button is pushed, go down
-    altitude -= 1;
   }
 
   // Print XY position and altitude
-  Serial.print("X: ");
+  Serial.print("X:  ");
   Serial.print(mapX);
-  Serial.print(" | Y: ");
+  Serial.print("  | Y: ");
   Serial.print(mapY);
-  Serial.print(" | Altitude: ");
+  Serial.print("  | Altitude: ");
   Serial.println(altitude); 
 
   // Delay before reading
